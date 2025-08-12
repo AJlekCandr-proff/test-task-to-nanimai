@@ -14,7 +14,7 @@ from test_app.infrastucture.database.models import User
 
 
 class UserReadRepository(UserReadRepositoryProtocol):
-    def __int__(self, gateway: AlchemyGateway) -> None:
+    def __init__(self, gateway: AlchemyGateway) -> None:
         self.async_session = gateway.async_session_factory
         self.model = User
 
@@ -46,7 +46,7 @@ class UserReadRepository(UserReadRepositoryProtocol):
 
 
 class UserWriteRepository(UserWriteRepositoryProtocol):
-    def __int__(self, gateway: AlchemyGateway) -> None:
+    def __init__(self, gateway: AlchemyGateway) -> None:
         self.async_session = gateway.transactional_session
         self.model = User
 
@@ -83,7 +83,7 @@ class UserWriteRepository(UserWriteRepositoryProtocol):
             return None
 
     async def set_max_balance_user(
-            self, user_uuid: UUID, max_balance: Decimal
+        self, user_uuid: UUID, max_balance: Decimal
     ) -> UserModel:
         async with self.async_session() as session:
             stmt = (

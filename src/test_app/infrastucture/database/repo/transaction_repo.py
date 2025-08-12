@@ -16,7 +16,7 @@ from test_app.infrastucture.database.models import Transaction
 
 
 class TransactionReadRepository(TransactionReadRepositoryProtocol):
-    def __int__(self, gateway: AlchemyGateway) -> None:
+    def __init__(self, gateway: AlchemyGateway) -> None:
         self.async_session = gateway.async_session_factory
         self.model = Transaction
 
@@ -51,7 +51,7 @@ class TransactionReadRepository(TransactionReadRepositoryProtocol):
 
 
 class TransactionWriteRepository(TransactionWriteRepositoryProtocol):
-    def __int__(self, gateway: AlchemyGateway) -> None:
+    def __init__(self, gateway: AlchemyGateway) -> None:
         self.async_session = gateway.transactional_session
         self.model = Transaction
 
