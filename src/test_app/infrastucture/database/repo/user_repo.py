@@ -71,6 +71,7 @@ class UserWriteRepository(UserWriteRepositoryProtocol):
                 update(self.model)
                 .values(balance=balance)
                 .where(self.model.uuid == user_uuid)
+                .returning(self.model)
             )
 
             answer = await session.execute(stmt)
@@ -90,6 +91,7 @@ class UserWriteRepository(UserWriteRepositoryProtocol):
                 update(self.model)
                 .values(max_balance=max_balance)
                 .where(self.model.uuid == user_uuid)
+                .returning(self.model)
             )
 
             answer = await session.execute(stmt)

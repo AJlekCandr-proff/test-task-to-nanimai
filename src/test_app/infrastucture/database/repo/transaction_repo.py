@@ -79,6 +79,7 @@ class TransactionWriteRepository(TransactionWriteRepositoryProtocol):
                 update(self.model)
                 .values(service_creator=token, save_sum=save_sum)
                 .where(self.model.user_uuid == user_uuid)
+                .returning(self.model)
             )
 
             answer = await session.execute(stmt)
@@ -96,6 +97,7 @@ class TransactionWriteRepository(TransactionWriteRepositoryProtocol):
                 update(self.model)
                 .values(status=StatusTransactionEnum.CLOSE)
                 .where(self.model.uuid == transaction_uuid)
+                .returning(self.model)
             )
 
             answer = await session.execute(stmt)
@@ -113,6 +115,7 @@ class TransactionWriteRepository(TransactionWriteRepositoryProtocol):
                 update(self.model)
                 .values(status=StatusTransactionEnum.CANCEL)
                 .where(self.model.uuid == transaction_uuid)
+                .returning(self.model)
             )
 
             answer = await session.execute(stmt)
