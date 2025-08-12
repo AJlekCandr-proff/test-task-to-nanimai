@@ -6,7 +6,7 @@ from test_app.domain.transaction.model import TransactionModel
 
 
 class TransactionReadRepositoryProtocol(Protocol):
-    async def get_transaction(self, transaction_uuid: UUID) -> TransactionModel:
+    async def get_transaction(self, transaction_uuid: UUID) -> TransactionModel | None:
         raise NotImplementedError()
 
 
