@@ -1,0 +1,5 @@
+APP:
+  RELOADED: True
+  PORT: 8000
+  HOST: 0.0.0.0
+  APP_DIRECTORY: src.test_app.application.application:app
