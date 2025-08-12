@@ -4,9 +4,11 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import ORJSONResponse
 
+from test_app.application.provider.gateways_provider import GatewaysProvider
+
 
 def setup_containers(app: FastAPI) -> None:
-    container = make_async_container()
+    container = make_async_container(GatewaysProvider())
 
     setup_dishka(container, app)
 
