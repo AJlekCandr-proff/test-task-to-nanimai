@@ -16,3 +16,4 @@ class TransactionModel:
     service_creator: str
     save_sum: Decimal
     user_uuid: UUID
+    uuid: UUID
