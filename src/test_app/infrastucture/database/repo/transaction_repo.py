@@ -11,7 +11,6 @@ from test_app.domain.transaction.enums.status_transaction_enum import (
     StatusTransactionEnum,
 )
 from test_app.domain.transaction.model import TransactionModel
-from test_app.domain.user.model import UserModel
 from test_app.gateways.alchemy_gateway import AlchemyGateway
 from test_app.infrastucture.database.models import Transaction
 
@@ -22,7 +21,7 @@ class TransactionReadRepository(TransactionReadRepositoryProtocol):
         self.model = Transaction
 
     @staticmethod
-    def _alchemy_to_model(data: Transaction | None) -> UserModel | None:
+    def _alchemy_to_model(data: Transaction | None) -> TransactionModel | None:
         try:
             return TransactionModel(
                 user_uuid=data.user_uuid,
@@ -57,7 +56,7 @@ class TransactionWriteRepository(TransactionWriteRepositoryProtocol):
         self.model = Transaction
 
     @staticmethod
-    def _alchemy_to_model(data: Transaction | None) -> UserModel | None:
+    def _alchemy_to_model(data: Transaction | None) -> TransactionModel | None:
         try:
             return TransactionModel(
                 user_uuid=data.user_uuid,
