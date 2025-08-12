@@ -12,7 +12,7 @@ class UserReadRepositoryProtocol(Protocol):
 
 class UserWriteRepositoryProtocol(Protocol):
     async def set_current_balance_user(
-        self, user_uuid: UUID, max_balance: Decimal
+        self, user_uuid: UUID, balance: Decimal
     ) -> UserModel:
         raise NotImplementedError()
 
