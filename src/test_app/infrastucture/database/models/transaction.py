@@ -1,7 +1,8 @@
 from datetime import datetime
+from decimal import Decimal
 from typing import TYPE_CHECKING
 
-from sqlalchemy import DateTime, func, Enum, String, UUID, ForeignKey
+from sqlalchemy import DateTime, func, Enum, String, UUID, ForeignKey, DECIMAL
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from test_app.domain.transaction.enums.status_transaction_enum import (
@@ -31,8 +32,9 @@ class Transaction(Base):
         String(35), comment="Токен для сервиса-создателя"
     )
 
-    save_sum: Mapped[str] = mapped_column(
-        String, comment="Сумма, которая была взята во время транзакции"
+    save_sum: Mapped[Decimal] = mapped_column(
+        DECIMAL(precision=10, scale=2),
+        comment="Сумма, которая была взята во время транзакции",
     )
 
     user_uuid: Mapped[UUID] = mapped_column(ForeignKey("users.uuid"))
