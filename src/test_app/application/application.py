@@ -1,3 +1,6 @@
+import asyncio
+from contextlib import asynccontextmanager
+
 from dishka import make_async_container
 from dishka.integrations.fastapi import FastapiProvider, setup_dishka
 from fastapi import FastAPI
@@ -6,6 +9,7 @@ from fastapi.responses import ORJSONResponse
 
 from test_app.application.provider.gateways_provider import GatewaysProvider
 from test_app.application.provider.repo_provider import RepositoryProvider
+from test_app.application.task.task import check_expired_transactions
 
 
 def setup_containers(app: FastAPI) -> None:
@@ -14,8 +18,16 @@ def setup_containers(app: FastAPI) -> None:
     setup_dishka(container, app)
 
 
+@asynccontextmanager
+async def lifespan(app: FastAPI) -> None:
+    # В ЛУЧШЕМ случае надо бы подключать Taskiq (скорее всего, я бы так и сделал, если время было больше...).
+    asyncio.create_task((check_expired_transactions()))
+
+    yield
+
+
 def create_app() -> FastAPI:
-    app = FastAPI(default_response_class=ORJSONResponse)
+    app = FastAPI(default_response_class=ORJSONResponse, lifespan=lifespan)
 
     setup_containers(app)
 
