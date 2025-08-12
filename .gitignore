@@ -5,6 +5,7 @@
 
 .env
 .env.prod
+settings.yaml
 
 logs
 *.log
