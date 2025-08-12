@@ -4,6 +4,10 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
+
+[project.scripts]
+app = "support_bot.runner:run"
+
 dependencies = [
     "alembic>=1.16.4",
     "asyncpg>=0.30.0",
