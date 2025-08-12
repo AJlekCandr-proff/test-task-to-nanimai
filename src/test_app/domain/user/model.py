@@ -3,7 +3,7 @@ from decimal import Decimal
 from uuid import UUID
 
 
-@dataclass
+@dataclass(frozen=True)
 class UserModel:
     uuid: UUID
     name: str
