@@ -1,5 +1,14 @@
 APP:
-  RELOADED: True
-  PORT: 8000
-  HOST: 0.0.0.0
-  APP_DIRECTORY: src.test_app.application.application:app
+  RELOADED: "True"
+  PORT: "8000"
+  HOST: "0.0.0.0"
+  APP_DIRECTORY: "src.test_app.application.application:app"
+
+
+DATABASE:
+  HOST: "localhost"
+  PORT: "5454"
+  DIALECT: "asyncpg"
+  USER: "admin"
+  PASSWORD: "admin"
+  DATABASE: "my_db"
