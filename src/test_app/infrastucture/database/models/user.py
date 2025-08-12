@@ -1,8 +1,12 @@
-from tokenize import String
+from typing import TYPE_CHECKING
 
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy import String
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from test_app.infrastucture.database.models.base import Base
+from test_app.infrastucture.database.models import Base
+
+if TYPE_CHECKING:
+    from test_app.infrastucture.database.models import Transaction
 
 
 class User(Base):
@@ -14,4 +18,8 @@ class User(Base):
 
     max_balance: Mapped[str] = mapped_column(
         String, default="1000", comment="Максимально возможный баланс пользователя"
+    )
+
+    transactions: Mapped["Transaction"] = relationship(
+        "Transaction", back_populates="user"
     )

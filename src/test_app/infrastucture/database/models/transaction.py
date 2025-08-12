@@ -1,12 +1,17 @@
 from datetime import datetime
+from typing import TYPE_CHECKING
 
-from sqlalchemy import DateTime, func, Enum, String
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy import DateTime, func, Enum, String, UUID, ForeignKey
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from test_app.domain.transaction.enums.status_transaction_enum import (
     StatusTransactionEnum,
 )
-from test_app.infrastucture.database.models.base import Base
+
+from test_app.infrastucture.database.models import Base
+
+if TYPE_CHECKING:
+    from test_app.infrastucture.database.models import User
 
 
 class Transaction(Base):
@@ -29,3 +34,7 @@ class Transaction(Base):
     save_sum: Mapped[str] = mapped_column(
         String, comment="Сумма, которая была взята во время транзакции"
     )
+
+    user_uuid: Mapped[UUID] = mapped_column(ForeignKey("users.uuid"))
+
+    user: Mapped["User"] = relationship("User", back_populates="transactions")
