@@ -4,7 +4,7 @@ from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
 from test_app.infrastucture.common.base_entities.singleton import Singleton
 
 
-class AlchemyGateway(Singleton):
+class AlchemyGateway:
     def __init__(
         self,
         host: str,
